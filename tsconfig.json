@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "allowJs": true,
+    "outDir": "build",
+    "rootDir": "src",
+    "baseUrl": "./src",
+    "strict": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["@types", "./node_modules/@types"]
+  },
+  "include": [
+    "./**/*"
+],
+  "exclude": [
+    "./build/**/*" // This is what fixed it!
+]
+}

@@ -1,0 +1,9 @@
+/node_modules
+/config
+/.env
+/public
+public
+build
+.elasticbeanstalk/
+www/
+.vscode
