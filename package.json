@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "NODE_PATH=./build node build/api/index.js",
     "start:dev": "nodemon",
