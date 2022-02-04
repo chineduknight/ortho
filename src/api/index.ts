@@ -5,13 +5,16 @@ import dotenv from "dotenv"
 import morgan from 'morgan'
 import helmet from 'helmet';
 import InputValidator from './validator';
-import { createHTML, getRecord } from './controller';
+import { createHTML, getRecord, register, login } from './controller';
+import cors from 'cors';
+
 
 
 dotenv.config()
 const app = express();
 
 
+app.use(cors());
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
@@ -28,6 +31,8 @@ app.use(express.static('public'));
 app.get("/", (req, res) => res.send("Express  Server"));
 
 app.post("/create", InputValidator.validate('createHtml'), createHTML)
+app.post("/users/auth/register/", register)
+app.post("/users/auth/login/", login)
 app.get('/webview/:fileId', getRecord)
 
 app.all("*", (req, res) => res.status(404).json({ data: "Route not found" }));
