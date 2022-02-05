@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import axios from "axios";
 
+
+
 export const login = async (req, res) => {
   const config = {
     url: "https://c-sport.tk/api/users/auth/login/",
@@ -39,6 +41,48 @@ export const register = async (req, res) => {
 
 };
 
+
+export const getUser = async (req, res) => {
+  const config = {
+    url: "https://c-sport.tk/api/users/",
+    headers: {},
+    data: req.body,
+  };
+  if (req.headers.authorization) {
+    config.headers = {
+      Authorization: req.headers?.authorization,
+    }
+  }
+  try {
+    const { data } = await axios.get(config.url, { headers: config.headers });
+    res.json(data);
+  } catch (error: any) {
+    res.status(error.response.status).json(error.response.data)
+
+  }
+}
+export const postQuestion = async (req, res) => {
+  const config: any = {
+    url: "https://c-sport.tk/api/question/",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: req.body,
+  };
+  if (req.headers.authorization) {
+    config.headers = {
+      ...config.headers,
+      Authorization: req.headers?.authorization,
+    }
+  }
+
+  try {
+    const { data } = await axios.post(config.url, config.data, { headers: config.headers });
+    res.json(data);
+  } catch (error: any) {
+    res.status(error.response.status).json(error.response.data)
+  }
+}
 export const createHTML = async (req, res) => {
   let html = req.body.html_content;
   const replace = req.body.replace;
